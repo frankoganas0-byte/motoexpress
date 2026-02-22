@@ -5,42 +5,59 @@
 <title>MotoExpress Baradero</title>
 <style>
 body{
-font-family: Arial;
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
+  font-family: Arial, sans-serif;
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:20px;
 }
 .container{
-max-width:400px;
-margin:auto;
+  max-width:400px;
+  margin:auto;
+  background:#1a1a1a;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 10px #000;
+}
+h1{
+  color:#f4c20d;
 }
 input{
-width:90%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:none;
+  width:90%;
+  padding:14px;
+  margin:10px 0;
+  border-radius:8px;
+  border:none;
 }
 button{
-width:95%;
-padding:14px;
-margin:10px 0;
-border-radius:8px;
-border:none;
-font-size:16px;
-cursor:pointer;
+  width:95%;
+  padding:16px;
+  margin:10px 0;
+  border-radius:8px;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+  font-weight:bold;
 }
 .calcular{
-background:#f4c20d;
+  background:#f4c20d;
+  color:#111;
 }
 .whatsapp{
-background:#25D366;
-color:white;
+  background:#25D366;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.whatsapp img{
+  width:24px;
+  margin-right:8px;
 }
 .resultado{
-margin-top:15px;
-font-size:18px;
+  margin-top:15px;
+  font-size:20px;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -49,17 +66,20 @@ font-size:18px;
 <div class="container">
 
 <h1>MotoExpress 🚀</h1>
-<p>Servicio 100% local en Baradero</p>
+<p>Envíos rápidos en Baradero</p>
 
 <input type="text" id="origen" placeholder="Dirección de origen">
 <input type="text" id="destino" placeholder="Dirección de destino">
-<input type="number" id="km" placeholder="Kilómetros">
+<input type="number" id="km" placeholder="Kilómetros (manual)">
 
 <button class="calcular" onclick="calcularPrecio()">Calcular Precio</button>
 
 <div class="resultado" id="resultado"></div>
 
-<button class="whatsapp" onclick="enviarWhatsApp()">Pedir por WhatsApp</button>
+<button class="whatsapp" onclick="enviarWhatsApp()">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  Pedir por WhatsApp
+</button>
 
 </div>
 
@@ -67,39 +87,41 @@ font-size:18px;
 let precioFinal=0;
 
 function calcularPrecio(){
-let km=document.getElementById("km").value;
-let bajada=3000;
-let precioKm=900;
+  let km=document.getElementById("km").value;
+  let bajada=3000;
+  let precioKm=900;
 
-if(km==""){
-alert("Ingresá los kilómetros");
-return;
-}
+  if(km==""){
+    alert("Ingresá los kilómetros");
+    return;
+  }
 
-precioFinal=bajada+(km*precioKm);
+  precioFinal=bajada+(km*precioKm);
 
-if(precioFinal<3500){
-precioFinal=3500;
-}
+  if(precioFinal<3500){
+    precioFinal=3500;
+  }
 
-document.getElementById("resultado").innerHTML=
-"Precio estimado: $"+precioFinal;
+  document.getElementById("resultado").innerHTML=
+    "Precio estimado: $"+precioFinal;
 }
 
 function enviarWhatsApp(){
-let origen=document.getElementById("origen").value;
-let destino=document.getElementById("destino").value;
+  let origen=document.getElementById("origen").value;
+  let destino=document.getElementById("destino").value;
 
-if(precioFinal==0){
-alert("Primero calculá el precio");
-return;
-}
+  if(precioFinal==0){
+    alert("Primero calculá el precio");
+    return;
+  }
 
-let mensaje=`Hola MotoExpress 🚀\nOrigen: ${origen}\nDestino: ${destino}\nPrecio estimado: $${precioFinal}`;
+  let mensaje=`Hola MotoExpress 🚀
+Origen: ${origen}
+Destino: ${destino}
+Precio estimado: $${precioFinal}`;
 
-let url="https://wa.me/5493329619242?text="+encodeURIComponent(mensaje);
-
-window.open(url);
+  let url="https://wa.me/5493329619242?text="+encodeURIComponent(mensaje);
+  window.open(url);
 }
 </script>
 
